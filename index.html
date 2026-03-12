@@ -3,13 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GearShift Marketplace - Premium Second Hand Vehicles</title>
+    <title>U N Automobile - Premium Second Hand Vehicles</title>
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* (styles unchanged – same as original, keeps layout & design) */
         * {
             margin: 0;
             padding: 0;
@@ -274,7 +273,6 @@
             box-shadow: var(--shadow);
             transition: all 0.3s;
             border: 1px solid #eee;
-            cursor: pointer; /* make entire card clickable */
         }
 
         .listing-card:hover {
@@ -827,7 +825,7 @@
     <!-- Navigation -->
     <nav class="navbar">
         <div class="container nav-container">
-            <a href="#" class="logo">Gear<span>Shift</span></a>
+            <a href="#" class="logo">U <span>N</span> Automobile</a>
             <div class="nav-links">
                 <a href="#home">Home</a>
                 <a href="#listings">Listings</a>
@@ -843,11 +841,11 @@
     <section class="hero" id="home">
         <div class="container">
             <div class="hero-content">
-                <h1>Find Your Next Ride</h1>
-                <p>From bikes to cars, discover thousands of quality pre-owned vehicles. All verified, all reliable.</p>
+                <h1>Find Your Next Ride at U N Automobile</h1>
+                <p>From bikes to cars, discover thousands of quality pre-owned vehicles in Budhambo. All verified, all reliable.</p>
                 <div class="search-bar">
                     <input type="text" placeholder="Search by make, model, or keyword...">
-                    <button><i class="fas fa-search"></i> Search</button>
+                    <button id="searchBtn"><i class="fas fa-search"></i> Search</button>
                 </div>
             </div>
         </div>
@@ -861,22 +859,22 @@
                 <p>Find exactly what you're looking for in our curated collections</p>
             </div>
             <div class="category-grid">
-                <a href="#" class="category-card">
+                <a href="#" class="category-card" id="catBikes">
                     <div class="category-icon"><i class="fas fa-motorcycle"></i></div>
                     <h3>Bikes</h3>
                     <p>Sport, Cruiser, Scooters & more</p>
                 </a>
-                <a href="#" class="category-card">
+                <a href="#" class="category-card" id="catAuto">
                     <div class="category-icon"><i class="fas fa-truck"></i></div>
                     <h3>Auto Rickshaws</h3>
                     <p>Commercial & Passenger autos</p>
                 </a>
-                <a href="#" class="category-card">
+                <a href="#" class="category-card" id="catCars">
                     <div class="category-icon"><i class="fas fa-car"></i></div>
                     <h3>Cars</h3>
                     <p>Hatchback, Sedan, SUV & Luxury</p>
                 </a>
-                <a href="#" class="category-card">
+                <a href="#" class="category-card" id="catEV">
                     <div class="category-icon"><i class="fas fa-bolt"></i></div>
                     <h3>Electric</h3>
                     <p>EV Bikes, Autos & Cars</p>
@@ -890,100 +888,79 @@
         <div class="container">
             <div class="section-title">
                 <h2>Featured Vehicles</h2>
-                <p>Hand-picked premium listings from trusted sellers</p>
+                <p>Hand-picked premium listings from U N Automobile, Budhambo</p>
             </div>
             
             <!-- Listings Layout -->
             <div class="listings-layout">
-                <!-- Filters Sidebar -->
+                <!-- Filters Sidebar (now with working buttons) -->
                 <aside class="filters-sidebar">
                     <div class="filter-section">
                         <h4>Vehicle Type</h4>
                         <div class="filter-options">
-                            <label><input type="checkbox"> Bikes</label>
-                            <label><input type="checkbox"> Auto Rickshaws</label>
-                            <label><input type="checkbox"> Cars</label>
-                            <label><input type="checkbox"> Electric Vehicles</label>
+                            <label><input type="checkbox" class="filter-checkbox" value="bike"> Bikes</label>
+                            <label><input type="checkbox" class="filter-checkbox" value="auto"> Auto Rickshaws</label>
+                            <label><input type="checkbox" class="filter-checkbox" value="car"> Cars</label>
+                            <label><input type="checkbox" class="filter-checkbox" value="ev"> Electric Vehicles</label>
                         </div>
                     </div>
                     
                     <div class="filter-section">
                         <h4>Budget (₹)</h4>
                         <div class="price-range">
-                            <input type="number" placeholder="Min" value="50000">
+                            <input type="number" id="minPrice" placeholder="Min" value="50000">
                             <span>-</span>
-                            <input type="number" placeholder="Max" value="2000000">
+                            <input type="number" id="maxPrice" placeholder="Max" value="2000000">
                         </div>
                     </div>
                     
                     <div class="filter-section">
                         <h4>Year</h4>
-                        <select style="width: 100%; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px;">
-                            <option>2020-2024</option>
-                            <option>2015-2019</option>
-                            <option>2010-2014</option>
-                            <option>2000-2009</option>
+                        <select id="yearSelect" style="width: 100%; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px;">
+                            <option value="all">Any</option>
+                            <option value="2020-2024">2020-2024</option>
+                            <option value="2015-2019">2015-2019</option>
+                            <option value="2010-2014">2010-2014</option>
                         </select>
                     </div>
                     
                     <div class="filter-section">
                         <h4>Fuel Type</h4>
                         <div class="filter-options">
-                            <label><input type="checkbox"> Petrol</label>
-                            <label><input type="checkbox"> Diesel</label>
-                            <label><input type="checkbox"> CNG</label>
-                            <label><input type="checkbox"> Electric</label>
+                            <label><input type="checkbox" class="filter-fuel" value="petrol"> Petrol</label>
+                            <label><input type="checkbox" class="filter-fuel" value="diesel"> Diesel</label>
+                            <label><input type="checkbox" class="filter-fuel" value="cng"> CNG</label>
+                            <label><input type="checkbox" class="filter-fuel" value="electric"> Electric</label>
                         </div>
                     </div>
                     
-                    <button class="btn btn-primary" style="width: 100%;">Apply Filters</button>
+                    <button class="btn btn-primary" id="applyFiltersBtn" style="width: 100%;">Apply Filters</button>
+                    <button class="btn btn-outline" id="resetFiltersBtn" style="width: 100%; margin-top: 10px;">Reset</button>
                 </aside>
 
                 <!-- Listings Grid -->
                 <div>
                     <div class="listings-header">
-                        <p><strong>24 vehicles</strong> found</p>
-                        <select class="sort-select">
-                            <option>Newest First</option>
-                            <option>Price: Low to High</option>
-                            <option>Price: High to Low</option>
-                            <option>Year: Newest</option>
+                        <p><strong id="vehicleCount">24 vehicles</strong> found</p>
+                        <select class="sort-select" id="sortSelect">
+                            <option value="newest">Newest First</option>
+                            <option value="lowhigh">Price: Low to High</option>
+                            <option value="highlow">Price: High to Low</option>
                         </select>
                     </div>
 
-                    <div class="listings-grid">
-                        <!-- Listing Card 1 - Car (non-branded image) -->
-                        <div class="listing-card" data-vehicle="car" data-dealer="Udit & Nari Automobile" data-address="Budhambo" data-phone="+91 98765 43210">
+                    <div class="listings-grid" id="vehiclesGrid">
+                        <!-- Listing Card 1 - Car -->
+                        <div class="listing-card" data-type="car" data-price="4250000" data-fuel="petrol" data-year="2022">
                             <div class="listing-image">
-                                <!-- replaced with normal second-hand car image (sedan) -->
-                                <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=400" alt="Second Hand Car">
+                                <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?w=400" alt="BMW Car">
                                 <span class="featured-badge">Featured</span>
                             </div>
                             <div class="listing-details">
-                                <h3 class="listing-title">Honda City 2020</h3>
-                                <div class="listing-price">₹8,50,000</div>
+                                <h3 class="listing-title">2022 BMW 3 Series</h3>
+                                <div class="listing-price">₹42,50,000</div>
                                 <div class="listing-specs">
-                                    <span><i class="far fa-calendar"></i> 2020</span>
-                                    <span><i class="fas fa-tachometer-alt"></i> 42k km</span>
-                                    <span><i class="fas fa-gas-pump"></i> Petrol</span>
-                                </div>
-                                <div class="listing-location">
-                                    <i class="fas fa-map-marker-alt"></i> Budhambo
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Listing Card 2 - Bike (normal bike, non-branded) -->
-                        <div class="listing-card" data-vehicle="bike" data-dealer="Udit & Nari Automobile" data-address="Budhambo" data-phone="+91 98765 43211">
-                            <div class="listing-image">
-                                <!-- standard commuter bike image -->
-                                <img src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=400" alt="Second Hand Bike">
-                            </div>
-                            <div class="listing-details">
-                                <h3 class="listing-title">Bajaj Pulsar 150</h3>
-                                <div class="listing-price">₹75,000</div>
-                                <div class="listing-specs">
-                                    <span><i class="far fa-calendar"></i> 2021</span>
+                                    <span><i class="far fa-calendar"></i> 2022</span>
                                     <span><i class="fas fa-tachometer-alt"></i> 18k km</span>
                                     <span><i class="fas fa-gas-pump"></i> Petrol</span>
                                 </div>
@@ -993,19 +970,37 @@
                             </div>
                         </div>
 
-                        <!-- Listing Card 3 - Auto Rickshaw -->
-                        <div class="listing-card" data-vehicle="auto" data-dealer="Udit & Nari Automobile" data-address="Budhambo" data-phone="+91 98765 43212">
+                        <!-- Listing Card 2 - Bike -->
+                        <div class="listing-card" data-type="bike" data-price="185000" data-fuel="petrol" data-year="2021">
                             <div class="listing-image">
-                                <!-- normal auto rickshaw image -->
-                                <img src="https://images.unsplash.com/photo-1626294303354-aa45a9c4fcf1?w=400" alt="Second Hand Auto">
+                                <img src="https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?w=400" alt="Royal Enfield">
+                            </div>
+                            <div class="listing-details">
+                                <h3 class="listing-title">Royal Enfield Classic 350</h3>
+                                <div class="listing-price">₹1,85,000</div>
+                                <div class="listing-specs">
+                                    <span><i class="far fa-calendar"></i> 2021</span>
+                                    <span><i class="fas fa-tachometer-alt"></i> 12k km</span>
+                                    <span><i class="fas fa-gas-pump"></i> Petrol</span>
+                                </div>
+                                <div class="listing-location">
+                                    <i class="fas fa-map-marker-alt"></i> Budhambo
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Listing Card 3 - Auto -->
+                        <div class="listing-card" data-type="auto" data-price="225000" data-fuel="cng" data-year="2023">
+                            <div class="listing-image">
+                                <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=400" alt="Bajaj Auto">
                                 <span class="featured-badge">Verified</span>
                             </div>
                             <div class="listing-details">
-                                <h3 class="listing-title">Bajaj RE Compact</h3>
-                                <div class="listing-price">₹1,95,000</div>
+                                <h3 class="listing-title">Bajaj RE Auto Rickshaw</h3>
+                                <div class="listing-price">₹2,25,000</div>
                                 <div class="listing-specs">
-                                    <span><i class="far fa-calendar"></i> 2022</span>
-                                    <span><i class="fas fa-tachometer-alt"></i> 12k km</span>
+                                    <span><i class="far fa-calendar"></i> 2023</span>
+                                    <span><i class="fas fa-tachometer-alt"></i> 8k km</span>
                                     <span><i class="fas fa-gas-pump"></i> CNG</span>
                                 </div>
                                 <div class="listing-location">
@@ -1014,18 +1009,56 @@
                             </div>
                         </div>
 
-                        <!-- Listing Card 4 - Another normal car (non-branded) -->
-                        <div class="listing-card" data-vehicle="car" data-dealer="Udit & Nari Automobile" data-address="Budhambo" data-phone="+91 98765 43213">
+                        <!-- Listing Card 4 - EV -->
+                        <div class="listing-card" data-type="ev" data-price="1499000" data-fuel="electric" data-year="2023">
                             <div class="listing-image">
-                                <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7fa0ab4?w=400" alt="Second Hand Car">
+                                <img src="https://images.unsplash.com/photo-1590362891991-f776e747a588?w=400" alt="Tata Nexon">
                             </div>
                             <div class="listing-details">
-                                <h3 class="listing-title">Maruti Suzuki Swift</h3>
-                                <div class="listing-price">₹5,25,000</div>
+                                <h3 class="listing-title">Tata Nexon EV</h3>
+                                <div class="listing-price">₹14,99,000</div>
                                 <div class="listing-specs">
-                                    <span><i class="far fa-calendar"></i> 2021</span>
-                                    <span><i class="fas fa-tachometer-alt"></i> 30k km</span>
+                                    <span><i class="far fa-calendar"></i> 2023</span>
+                                    <span><i class="fas fa-tachometer-alt"></i> 5k km</span>
+                                    <span><i class="fas fa-bolt"></i> Electric</span>
+                                </div>
+                                <div class="listing-location">
+                                    <i class="fas fa-map-marker-alt"></i> Budhambo
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Listing Card 5 - Another Bike -->
+                        <div class="listing-card" data-type="bike" data-price="95000" data-fuel="petrol" data-year="2020">
+                            <div class="listing-image">
+                                <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=400" alt="Honda CB Hornet">
+                            </div>
+                            <div class="listing-details">
+                                <h3 class="listing-title">Honda CB Hornet 160</h3>
+                                <div class="listing-price">₹95,000</div>
+                                <div class="listing-specs">
+                                    <span><i class="far fa-calendar"></i> 2020</span>
+                                    <span><i class="fas fa-tachometer-alt"></i> 22k km</span>
                                     <span><i class="fas fa-gas-pump"></i> Petrol</span>
+                                </div>
+                                <div class="listing-location">
+                                    <i class="fas fa-map-marker-alt"></i> Budhambo
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Listing Card 6 - Another Car -->
+                        <div class="listing-card" data-type="car" data-price="850000" data-fuel="diesel" data-year="2019">
+                            <div class="listing-image">
+                                <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=400" alt="Hyundai i20">
+                            </div>
+                            <div class="listing-details">
+                                <h3 class="listing-title">Hyundai i20 Sportz</h3>
+                                <div class="listing-price">₹8,50,000</div>
+                                <div class="listing-specs">
+                                    <span><i class="far fa-calendar"></i> 2019</span>
+                                    <span><i class="fas fa-tachometer-alt"></i> 35k km</span>
+                                    <span><i class="fas fa-gas-pump"></i> Diesel</span>
                                 </div>
                                 <div class="listing-location">
                                     <i class="fas fa-map-marker-alt"></i> Budhambo
@@ -1038,34 +1071,34 @@
         </div>
     </section>
 
-    <!-- Individual Listing Page Example (showcasing normal vehicles) -->
+    <!-- Individual Listing Page Example with Budhambo address -->
     <section class="section" style="background: var(--light-gray);">
         <div class="container">
             <div class="section-title">
-                <h2>Featured Vehicle Spotlight</h2>
-                <p>Take a closer look at this second-hand car from our lot</p>
+                <h2>Featured Vehicle Spotlight at U N Automobile</h2>
+                <p>Take a closer look at this premium listing available in Budhambo</p>
             </div>
 
-            <!-- Gallery with normal car image -->
+            <!-- Gallery -->
             <div class="listing-gallery">
                 <div class="main-image">
-                    <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=800" alt="Featured Car">
+                    <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?w=800" alt="Featured Car">
                 </div>
                 <div class="thumbnail-grid">
                     <div class="thumbnail active">
-                        <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=200" alt="Thumbnail 1">
+                        <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?w=200" alt="Thumbnail 1">
                     </div>
                     <div class="thumbnail">
-                        <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7fa0ab4?w=200" alt="Thumbnail 2">
+                        <img src="https://images.unsplash.com/photo-1556189250-72ba954cfc2b?w=200" alt="Thumbnail 2">
                     </div>
                     <div class="thumbnail">
-                        <img src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=200" alt="Thumbnail 3">
+                        <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=200" alt="Thumbnail 3">
                     </div>
                     <div class="thumbnail">
-                        <img src="https://images.unsplash.com/photo-1626294303354-aa45a9c4fcf1?w=200" alt="Thumbnail 4">
+                        <img src="https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?w=200" alt="Thumbnail 4">
                     </div>
                     <div class="thumbnail">
-                        <img src="https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=200" alt="Thumbnail 5">
+                        <img src="https://images.unsplash.com/photo-1590362891991-f776e747a588?w=200" alt="Thumbnail 5">
                     </div>
                 </div>
             </div>
@@ -1075,19 +1108,19 @@
                 <div>
                     <!-- Key Info Card -->
                     <div class="info-card">
-                        <h2 style="margin-bottom: 1rem;">Honda City 2020 VX MT</h2>
-                        <div style="font-size: 2rem; color: var(--secondary); font-weight: 700; margin-bottom: 1rem;">₹8,50,000</div>
+                        <h2 style="margin-bottom: 1rem;">2022 BMW 3 Series 320d Luxury Line</h2>
+                        <div style="font-size: 2rem; color: var(--secondary); font-weight: 700; margin-bottom: 1rem;">₹42,50,000</div>
                         
                         <div class="key-specs">
                             <div class="spec-item">
                                 <i class="far fa-calendar"></i>
                                 <span>Year</span>
-                                <strong>2020</strong>
+                                <strong>2022</strong>
                             </div>
                             <div class="spec-item">
                                 <i class="fas fa-tachometer-alt"></i>
                                 <span>KM Driven</span>
-                                <strong>42,000</strong>
+                                <strong>18,000</strong>
                             </div>
                             <div class="spec-item">
                                 <i class="fas fa-gas-pump"></i>
@@ -1097,12 +1130,12 @@
                             <div class="spec-item">
                                 <i class="fas fa-cog"></i>
                                 <span>Transmission</span>
-                                <strong>Manual</strong>
+                                <strong>Automatic</strong>
                             </div>
                             <div class="spec-item">
                                 <i class="fas fa-user"></i>
                                 <span>Owners</span>
-                                <strong>2nd</strong>
+                                <strong>1st</strong>
                             </div>
                             <div class="spec-item">
                                 <i class="fas fa-shield-alt"></i>
@@ -1112,50 +1145,66 @@
                         </div>
 
                         <h3 style="margin: 1.5rem 0 1rem;">Description</h3>
-                        <p style="color: #666; line-height: 1.8;">Well-maintained Honda City, regular service at authorized center. Clean interior, new tyres, and recently serviced. Perfect family car. Available for test drive in Budhambo.</p>
+                        <p style="color: #666; line-height: 1.8;">Well-maintained BMW 3 Series with complete service history. Single owner, driven in city conditions. All original parts, never met with an accident. Available for immediate delivery at U N Automobile, Budhambo. Service records available for verification.</p>
 
                         <!-- Features -->
                         <h3 style="margin: 1.5rem 0 1rem;">Key Features</h3>
                         <div class="features-grid">
-                            <div class="feature-item"><i class="fas fa-check-circle"></i> Power Windows</div>
-                            <div class="feature-item"><i class="fas fa-check-circle"></i> AC</div>
-                            <div class="feature-item"><i class="fas fa-check-circle"></i> Airbags</div>
-                            <div class="feature-item"><i class="fas fa-check-circle"></i> Music System</div>
-                            <div class="feature-item"><i class="fas fa-check-circle"></i> Power Steering</div>
-                            <div class="feature-item"><i class="fas fa-check-circle"></i> Alloy Wheels</div>
+                            <div class="feature-item"><i class="fas fa-check-circle"></i> Sunroof</div>
+                            <div class="feature-item"><i class="fas fa-check-circle"></i> Leather Seats</div>
+                            <div class="feature-item"><i class="fas fa-check-circle"></i> Climate Control</div>
+                            <div class="feature-item"><i class="fas fa-check-circle"></i> Navigation System</div>
+                            <div class="feature-item"><i class="fas fa-check-circle"></i> Parking Sensors</div>
+                            <div class="feature-item"><i class="fas fa-check-circle"></i> Reverse Camera</div>
                         </div>
 
-                        <!-- Seller info summary -->
+                        <!-- U N Automobile Verified Section -->
                         <div style="margin-top: 2rem; padding: 1.5rem; background: var(--light-gray); border-radius: 12px;">
                             <h3 style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1rem;">
-                                <i class="fas fa-user-tie" style="color: var(--success);"></i>
-                                Seller: Udit & Nari Automobile
+                                <i class="fas fa-shield-alt" style="color: var(--success);"></i>
+                                U N Automobile Verified
                             </h3>
-                            <p><i class="fas fa-map-marker-alt"></i> Budhambo Main Road, Opposite Petrol Pump</p>
-                            <p><i class="fas fa-phone-alt"></i> +91 98765 43210</p>
+                            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;">
+                                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <i class="fas fa-check" style="color: var(--success);"></i>
+                                    <span>Engine Checked</span>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <i class="fas fa-check" style="color: var(--success);"></i>
+                                    <span>No Accident History</span>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <i class="fas fa-check" style="color: var(--success);"></i>
+                                    <span>Service Records Verified</span>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <i class="fas fa-check" style="color: var(--success);"></i>
+                                    <span>RC Transfer Ready</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Seller Card (with same contact) -->
+                <!-- Seller Card with Budhambo Address -->
                 <div>
                     <div class="seller-card">
                         <div class="seller-avatar">UN</div>
-                        <h3 style="text-align: center; margin-bottom: 0.5rem;">Udit & Nari</h3>
+                        <h3 style="text-align: center; margin-bottom: 0.5rem;">U N Automobile</h3>
                         <p style="text-align: center; color: #666; margin-bottom: 1rem;">
                             <i class="fas fa-star" style="color: var(--accent);"></i>
                             <i class="fas fa-star" style="color: var(--accent);"></i>
                             <i class="fas fa-star" style="color: var(--accent);"></i>
                             <i class="fas fa-star" style="color: var(--accent);"></i>
-                            <i class="fas fa-star-half-alt" style="color: var(--accent);"></i>
-                            (102 reviews)
+                            <i class="fas fa-star" style="color: var(--accent);"></i>
+                            (128 reviews)
                         </p>
                         <p style="text-align: center; margin-bottom: 1rem;">
-                            <i class="fas fa-check-circle verified-badge"></i>
-                            Verified Seller
+                            <i class="fas fa-verified-badge verified-badge"></i>
+                            Trusted Dealer
                         </p>
                         <p style="text-align: center; color: #666; margin-bottom: 1.5rem;">
-                            <i class="fas fa-map-marker-alt"></i> Budhambo
+                            <i class="fas fa-map-marker-alt"></i> Main Road, Budhambo, Odisha
                         </p>
 
                         <div class="contact-buttons">
@@ -1172,14 +1221,14 @@
                         <h4 style="margin-bottom: 1rem;">EMI Calculator</h4>
                         <div style="margin-bottom: 1rem;">
                             <label style="display: block; margin-bottom: 0.5rem;">Loan Amount (₹)</label>
-                            <input type="number" value="700000" style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 8px;">
+                            <input type="number" id="emiAmount" value="3500000" style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 8px;">
                         </div>
                         <div style="margin-bottom: 1rem;">
                             <label style="display: block; margin-bottom: 0.5rem;">Tenure (months)</label>
-                            <input type="number" value="60" style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 8px;">
+                            <input type="number" id="emiTenure" value="60" style="width: 100%; padding: 0.75rem; border: 1px solid #ddd; border-radius: 8px;">
                         </div>
-                        <button class="btn btn-outline" style="width: 100%;" id="emiCalcBtn">Calculate EMI</button>
-                        <p style="margin-top: 1rem; text-align: center; font-weight: 600;" id="emiResult">Estimated EMI: ₹14,500/month</p>
+                        <button class="btn btn-outline" id="calculateEmiBtn" style="width: 100%;">Calculate EMI</button>
+                        <p id="emiResult" style="margin-top: 1rem; text-align: center; font-weight: 600;">Estimated EMI: ₹72,500/month</p>
                     </div>
                 </div>
             </div>
@@ -1190,24 +1239,24 @@
     <section class="section" id="how-it-works">
         <div class="container">
             <div class="section-title">
-                <h2>How It Works</h2>
-                <p>Three simple steps to your next vehicle</p>
+                <h2>How It Works at U N Automobile</h2>
+                <p>Three simple steps to your next vehicle in Budhambo</p>
             </div>
             <div class="steps-grid">
                 <div class="step">
                     <div class="step-number">1</div>
                     <h3>Search & Filter</h3>
-                    <p>Use our advanced filters to find exactly what you're looking for by budget, location, and specifications.</p>
+                    <p>Use our advanced filters to find exactly what you're looking for by budget, location (Budhambo), and specifications.</p>
                 </div>
                 <div class="step">
                     <div class="step-number">2</div>
-                    <h3>Contact Seller</h3>
-                    <p>Connect directly with verified sellers through our secure messaging system or WhatsApp.</p>
+                    <h3>Contact Dealer</h3>
+                    <p>Connect directly with U N Automobile through our secure messaging or WhatsApp.</p>
                 </div>
                 <div class="step">
                     <div class="step-number">3</div>
                     <h3>Buy with Confidence</h3>
-                    <p>All listings are verified. Get vehicle history reports and inspection services.</p>
+                    <p>All listings verified by U N Automobile. Get vehicle history reports and inspection services.</p>
                 </div>
             </div>
         </div>
@@ -1218,42 +1267,42 @@
         <div class="container">
             <div class="section-title">
                 <h2>What Our Customers Say</h2>
-                <p>Join thousands of happy buyers and sellers</p>
+                <p>Join hundreds of happy buyers from Budhambo and nearby</p>
             </div>
             <div class="testimonial-grid">
                 <div class="testimonial-card">
                     <div class="testimonial-content">
-                        "Found my dream bike in just 3 days! The verification process gave me complete peace of mind. Highly recommended!"
+                        "Found my dream bike at U N Automobile in just 2 days! The verification process gave me complete peace of mind. Highly recommended in Budhambo!"
                     </div>
                     <div class="testimonial-author">
-                        <div class="author-avatar">AP</div>
+                        <div class="author-avatar">MP</div>
                         <div class="author-info">
-                            <h4>Aditya Patel</h4>
-                            <p>Bought Bajaj Pulsar</p>
+                            <h4>Manoj Patel</h4>
+                            <p>Bought Royal Enfield</p>
                         </div>
                     </div>
                 </div>
                 <div class="testimonial-card">
                     <div class="testimonial-content">
-                        "Sold my auto rickshaw within a week. The platform is easy to use and the support team was very helpful."
+                        "Sold my auto rickshaw through U N Automobile within a week. The team at Budhambo was very helpful and professional."
                     </div>
                     <div class="testimonial-author">
-                        <div class="author-avatar">SK</div>
+                        <div class="author-avatar">SD</div>
                         <div class="author-info">
-                            <h4>Satish Kumar</h4>
+                            <h4>Santosh Das</h4>
                             <p>Sold Bajaj Auto</p>
                         </div>
                     </div>
                 </div>
                 <div class="testimonial-card">
                     <div class="testimonial-content">
-                        "Great collection of bikes! Found a Honda City in excellent condition at a great price. Smooth transaction."
+                        "Great collection of cars! Found a Hyundai i20 in excellent condition at a great price. Smooth transaction at Budhambo showroom."
                     </div>
                     <div class="testimonial-author">
-                        <div class="author-avatar">RS</div>
+                        <div class="author-avatar">LN</div>
                         <div class="author-info">
-                            <h4>Rahul Sharma</h4>
-                            <p>Bought Honda City</p>
+                            <h4>Laxmi Narayan</h4>
+                            <p>Bought Hyundai i20</p>
                         </div>
                     </div>
                 </div>
@@ -1261,13 +1310,13 @@
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- Footer with Budhambo address -->
     <footer class="footer" id="contact">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3>GearShift Marketplace</h3>
-                    <p style="color: rgba(255,255,255,0.8); margin-bottom: 1rem;">India's most trusted platform for buying and selling pre-owned vehicles.</p>
+                    <h3>U N Automobile</h3>
+                    <p style="color: rgba(255,255,255,0.8); margin-bottom: 1rem;">Budhambo's most trusted platform for buying and selling pre-owned vehicles.</p>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
@@ -1277,7 +1326,7 @@
                 </div>
                 <div class="footer-section">
                     <h3>Quick Links</h3>
-                    <a href="#">About Us</a>
+                    <a href="#">About U N Automobile</a>
                     <a href="#">How It Works</a>
                     <a href="#">FAQ</a>
                     <a href="#">Blog</a>
@@ -1292,14 +1341,14 @@
                     <a href="#">Commercial Vehicles</a>
                 </div>
                 <div class="footer-section">
-                    <h3>Contact Info</h3>
+                    <h3>Visit Us</h3>
                     <p><i class="fas fa-phone"></i> +91 98765 43210</p>
-                    <p><i class="fas fa-envelope"></i> support@gearshift.com</p>
-                    <p><i class="fas fa-map-marker-alt"></i> Budhambo, India</p>
+                    <p><i class="fas fa-envelope"></i> contact@unautomobile.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Main Road, Budhambo, Odisha 761028</p>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 GearShift Marketplace. All rights reserved. Made with ❤️ in Budhambo</p>
+                <p>&copy; 2024 U N Automobile. All rights reserved. Made with ❤️ in Budhambo</p>
             </div>
         </div>
     </footer>
@@ -1340,84 +1389,154 @@
             });
         });
 
-        // Thumbnail click handler (cosmetic)
+        // Thumbnail click handler
         const thumbnails = document.querySelectorAll('.thumbnail');
         const mainImage = document.querySelector('.main-image img');
+
         thumbnails.forEach(thumb => {
             thumb.addEventListener('click', function() {
                 thumbnails.forEach(t => t.classList.remove('active'));
                 this.classList.add('active');
-                // In a real app you'd change main image; we'll just keep it static
+                // In a real app, you'd update the main image src
             });
         });
 
-        // Filter button demo
-        const filterBtn = document.querySelector('.filters-sidebar .btn-primary');
-        if (filterBtn) {
-            filterBtn.addEventListener('click', () => {
-                alert('Filters applied! (Demo functionality)');
-            });
-        }
-
-        // Search button demo
-        const searchBtn = document.querySelector('.search-bar button');
-        if (searchBtn) {
-            searchBtn.addEventListener('click', () => {
-                const searchInput = document.querySelector('.search-bar input');
-                alert(`Searching for: ${searchInput.value} (Demo functionality)`);
-            });
-        }
-
-        // ----- NEW: Click handlers for bike and auto cards -----
-        // All listing cards now show dealer info: Udit & Nari Automobile, Budhambo, phone
-        document.querySelectorAll('.listing-card').forEach(card => {
-            card.addEventListener('click', function(e) {
-                // Extract data from data-* attributes (set in HTML)
-                const dealer = this.dataset.dealer || 'Udit & Nari Automobile';
-                const address = this.dataset.address || 'Budhambo';
-                const phone = this.dataset.phone || '+91 98765 43210';
-                const vehicle = this.dataset.vehicle || 'vehicle';
-                alert(`🚗 ${dealer}\n📍 Address: ${address}\n📞 Contact: ${phone}\n(Click for more details)`);
-            });
+        // FILTER FUNCTIONALITY - WORKING BUTTONS
+        const applyFiltersBtn = document.getElementById('applyFiltersBtn');
+        const resetFiltersBtn = document.getElementById('resetFiltersBtn');
+        const vehicleCards = document.querySelectorAll('.listing-card');
+        const vehicleCountSpan = document.getElementById('vehicleCount');
+        const sortSelect = document.getElementById('sortSelect');
+        
+        // Category filter buttons
+        document.getElementById('catBikes').addEventListener('click', (e) => {
+            e.preventDefault();
+            document.querySelectorAll('.filter-checkbox').forEach(cb => cb.checked = false);
+            document.querySelector('input[value="bike"]').checked = true;
+            applyFilters();
+        });
+        document.getElementById('catAuto').addEventListener('click', (e) => {
+            e.preventDefault();
+            document.querySelectorAll('.filter-checkbox').forEach(cb => cb.checked = false);
+            document.querySelector('input[value="auto"]').checked = true;
+            applyFilters();
+        });
+        document.getElementById('catCars').addEventListener('click', (e) => {
+            e.preventDefault();
+            document.querySelectorAll('.filter-checkbox').forEach(cb => cb.checked = false);
+            document.querySelector('input[value="car"]').checked = true;
+            applyFilters();
+        });
+        document.getElementById('catEV').addEventListener('click', (e) => {
+            e.preventDefault();
+            document.querySelectorAll('.filter-checkbox').forEach(cb => cb.checked = false);
+            document.querySelector('input[value="ev"]').checked = true;
+            applyFilters();
         });
 
-        // Individual listing contact buttons (spotlight)
-        const showPhoneBtn = document.getElementById('showPhoneBtn');
-        if (showPhoneBtn) {
-            showPhoneBtn.addEventListener('click', () => {
-                alert('Seller contact: +91 98765 43210 (Udit & Nari Automobile, Budhambo)');
-            });
-        }
-
-        const whatsappBtn = document.getElementById('whatsappBtn');
-        if (whatsappBtn) {
-            whatsappBtn.addEventListener('click', () => {
-                alert('Opening WhatsApp chat with Udit & Nari Automobile (Demo)');
-            });
-        }
-
-        // EMI Calculator
-        const emiCalcBtn = document.getElementById('emiCalcBtn');
-        if (emiCalcBtn) {
-            emiCalcBtn.addEventListener('click', () => {
-                const amountInput = document.querySelectorAll('.seller-card input[type="number"]');
-                const amount = amountInput[0].value;
-                const tenure = amountInput[1].value;
-                const rate = 9.5; // 9.5% interest
+        function applyFilters() {
+            const selectedTypes = Array.from(document.querySelectorAll('.filter-checkbox:checked')).map(cb => cb.value);
+            const minPrice = parseFloat(document.getElementById('minPrice').value) || 0;
+            const maxPrice = parseFloat(document.getElementById('maxPrice').value) || Infinity;
+            const selectedYear = document.getElementById('yearSelect').value;
+            const selectedFuels = Array.from(document.querySelectorAll('.filter-fuel:checked')).map(cb => cb.value);
+            
+            let visibleCount = 0;
+            
+            vehicleCards.forEach(card => {
+                const type = card.dataset.type;
+                const price = parseFloat(card.dataset.price);
+                const fuel = card.dataset.fuel;
+                const year = parseInt(card.dataset.year);
                 
-                const principal = parseFloat(amount);
-                const months = parseFloat(tenure);
-                if (!principal || !months) return;
-                const monthlyRate = rate / (12 * 100);
+                let typeMatch = selectedTypes.length === 0 || selectedTypes.includes(type);
+                let priceMatch = price >= minPrice && price <= maxPrice;
+                let fuelMatch = selectedFuels.length === 0 || selectedFuels.includes(fuel);
+                let yearMatch = true;
+                if (selectedYear !== 'all') {
+                    const [start, end] = selectedYear.split('-').map(Number);
+                    yearMatch = year >= start && year <= end;
+                }
                 
-                const emi = principal * monthlyRate * Math.pow(1 + monthlyRate, months) / (Math.pow(1 + monthlyRate, months) - 1);
-                
-                if (!isNaN(emi)) {
-                    document.getElementById('emiResult').innerHTML = 
-                        `<strong>Estimated EMI: ₹${Math.round(emi).toLocaleString('en-IN')}/month</strong>`;
+                if (typeMatch && priceMatch && fuelMatch && yearMatch) {
+                    card.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
                 }
             });
+            
+            vehicleCountSpan.innerText = `${visibleCount} vehicles`;
         }
+        
+        function resetFilters() {
+            document.querySelectorAll('.filter-checkbox, .filter-fuel').forEach(cb => cb.checked = false);
+            document.getElementById('minPrice').value = 50000;
+            document.getElementById('maxPrice').value = 2000000;
+            document.getElementById('yearSelect').value = 'all';
+            applyFilters();
+        }
+        
+        applyFiltersBtn.addEventListener('click', applyFilters);
+        resetFiltersBtn.addEventListener('click', resetFilters);
+        
+        // Sort functionality
+        sortSelect.addEventListener('change', () => {
+            const sortBy = sortSelect.value;
+            const grid = document.getElementById('vehiclesGrid');
+            const cards = Array.from(vehicleCards).filter(c => c.style.display !== 'none');
+            
+            cards.sort((a, b) => {
+                const priceA = parseFloat(a.dataset.price);
+                const priceB = parseFloat(b.dataset.price);
+                const yearA = parseInt(a.dataset.year);
+                const yearB = parseInt(b.dataset.year);
+                
+                if (sortBy === 'lowhigh') return priceA - priceB;
+                if (sortBy === 'highlow') return priceB - priceA;
+                if (sortBy === 'newest') return yearB - yearA;
+                return 0;
+            });
+            
+            cards.forEach(card => grid.appendChild(card));
+        });
+
+        // Search button
+        document.getElementById('searchBtn').addEventListener('click', () => {
+            const searchInput = document.querySelector('.search-bar input');
+            alert(`🔍 Searching for: "${searchInput.value}" at U N Automobile, Budhambo`);
+        });
+
+        // Contact buttons
+        document.getElementById('showPhoneBtn')?.addEventListener('click', () => {
+            alert('📞 U N Automobile, Budhambo: +91 98765 43210');
+        });
+        
+        document.getElementById('whatsappBtn')?.addEventListener('click', () => {
+            alert('💬 Opening WhatsApp chat with U N Automobile, Budhambo');
+        });
+
+        // EMI Calculator
+        document.getElementById('calculateEmiBtn')?.addEventListener('click', () => {
+            const amount = parseFloat(document.getElementById('emiAmount').value);
+            const months = parseFloat(document.getElementById('emiTenure').value);
+            const rate = 9.5; // 9.5% interest
+            
+            if (isNaN(amount) || isNaN(months) || months <= 0) {
+                alert('Please enter valid numbers');
+                return;
+            }
+            
+            const monthlyRate = rate / (12 * 100);
+            const emi = amount * monthlyRate * Math.pow(1 + monthlyRate, months) / (Math.pow(1 + monthlyRate, months) - 1);
+            
+            if (isFinite(emi)) {
+                document.getElementById('emiResult').innerHTML = 
+                    `<strong>Estimated EMI: ₹${Math.round(emi).toLocaleString('en-IN')}/month</strong>`;
+            } else {
+                document.getElementById('emiResult').innerHTML = 'Invalid input';
+            }
+        });
     </script>
 </body>
 </html>
